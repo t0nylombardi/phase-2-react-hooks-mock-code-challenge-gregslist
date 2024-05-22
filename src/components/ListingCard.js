@@ -1,11 +1,15 @@
 import React from "react";
 
-function ListingCard() {
+function ListingCard({listing, onDelete}) {
+  const {id, price, description, image, location} = listing;
+
+  const handleDelete = async () => onDelete(id);
+
   return (
-    <li className="card">
+    <li className="card" key={id}>
       <div className="image">
-        <span className="price">$0</span>
-        <img src={"https://via.placeholder.com/300x300"} alt={"description"} />
+        <span className="price">{`$ ${price}`}</span>
+        <img src={image} alt={"description"} />
       </div>
       <div className="details">
         {true ? (
@@ -13,9 +17,9 @@ function ListingCard() {
         ) : (
           <button className="emoji-button favorite">☆</button>
         )}
-        <strong>{"description"}</strong>
-        <span> · {"location"}</span>
-        <button className="emoji-button delete">🗑</button>
+        <strong>{description}</strong>
+        <span> · {location}</span>
+        <button className="emoji-button delete" onClick={handleDelete}>🗑</button>
       </div>
     </li>
   );
